@@ -1,6 +1,6 @@
 ﻿/*
  * Copyright (c) 2015 Mehrzad Chehraz (mehrzady@gmail.com)
- * Relased under the MIT License
+ * Released under the MIT License
  * http://chehraz.ir/mit_license
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -338,13 +338,13 @@ namespace Atf.UI {
       }
       protected override void OnEnter(EventArgs e) {
          base.OnEnter(e);
-         if (this.Child != null) {
+         if (this.Style == DropDownControlStyle.Editable && this.Child != null) {
             this.Child.Focus();
          }
       }
       protected override void OnGotFocus(EventArgs e) {
          base.OnGotFocus(e);
-         if (this.Parent is ContainerControl) {
+         if (this.Style == DropDownControlStyle.Editable && this.Parent is ContainerControl) {
             ContainerControl container = (ContainerControl)this.Parent;
             container.SelectNextControl(this, false, true, true, true);
          }
