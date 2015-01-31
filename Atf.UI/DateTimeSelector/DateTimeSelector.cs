@@ -39,6 +39,18 @@ namespace Atf.UI {
    [ToolboxItem(true)]
    [ToolboxBitmap(typeof(DateTimeSelector), "DateTimeSelector.bmp")]
    public class DateTimeSelector : DropDownControl {
+      #region Events
+      [Browsable(false)]
+      [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+      [EditorBrowsable(EditorBrowsableState.Never)]
+      public new event EventHandler TextChanged {
+         add {}
+         remove {}
+      }
+      [Category("Property Changed")]
+      public event EventHandler ValueChanged;
+      #endregion
+
       #region Fields
       private DateTimeSelectorChild child;
       private Color calendarBackColor = SystemColors.Window;
@@ -52,7 +64,7 @@ namespace Atf.UI {
       private RightToLeft calendarRightToLeft = RightToLeft.Inherit;
       private static DateTimeFormatInfo persianFormat;
       private bool usePersianFormat = false;
-      public event EventHandler ValueChanged;
+
       #endregion
 
       #region Constructors
@@ -464,7 +476,7 @@ namespace Atf.UI {
             this.DateTimeFormat = null;
          }
       }
-      private void OnValueChanged() {
+      protected virtual void OnValueChanged() {
          if (this.ValueChanged != null) {
             this.ValueChanged(this, EventArgs.Empty);
          }

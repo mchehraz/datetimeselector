@@ -562,7 +562,7 @@ namespace Atf.UI {
          }
       }
       [Browsable(true)]
-      [Category("Apperance")]
+      [Category("Appearance")]
       [DefaultValue(DropDownControlStyle.Editable)]
       [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
       [EditorBrowsable(EditorBrowsableState.Always)]
