@@ -64,7 +64,6 @@ namespace Atf.UI {
       private RightToLeft calendarRightToLeft = RightToLeft.Inherit;
       private static DateTimeFormatInfo persianFormat;
       private bool usePersianFormat = false;
-
       #endregion
 
       #region Constructors
@@ -255,7 +254,9 @@ namespace Atf.UI {
             DateTime? value = this.Value;
             if (value.HasValue) {
                string formatString = this.GetFormatString();
-               return value.Value.ToString(formatString, this.DateTimeFormat);
+               return DateTimeFormatter.Format(formatString, this.DateTimeFormat, this.DateTimeFormat.Calendar,
+                                               this.Value);
+               // return value.Value.ToString(formatString, this.DateTimeFormat);
             }
             return string.Empty;
          }
@@ -423,7 +424,9 @@ namespace Atf.UI {
          DateTime? value = this.Value;
          if (value.HasValue) {
             if (!string.IsNullOrEmpty(format)) {
-               return value.Value.ToString(format, this.DateTimeFormat);
+               // return value.Value.ToString(format, this.DateTimeFormat);
+               return DateTimeFormatter.Format(format, this.DateTimeFormat, this.DateTimeFormat.Calendar,
+                                               this.Value);
             }
          }
          return string.Empty;

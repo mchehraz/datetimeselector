@@ -544,6 +544,16 @@ namespace Atf.Core.Text {
          }
          return false;
       }
+      public static string Format(string format, DateTimeFormatInfo dateTimeFormat,
+                                                Calendar calendar, DateTime? value) {
+         SpecifierInfo[] specifiers = GetSpecifiers(format);
+         DateTimeFormatter formatter = new DateTimeFormatter(dateTimeFormat, value);
+         StringBuilder sb = new StringBuilder();
+         foreach (var specifier in specifiers) {
+            sb.Append(formatter.GetDisplayText(specifier));
+         }
+         return sb.ToString();
+      }
       public string GetDisplayText(SpecifierInfo specifier) {
          if (specifier.ValueType == ValueType.StringLiteral) {
             return specifier.Symbol;
