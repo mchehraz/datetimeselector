@@ -414,8 +414,12 @@ namespace Atf.UI {
          Size childProposedSize = new Size(Math.Max(0, proposedSize.Width - this.ArrowWidth - ArrowSeparatorWidth - 
                                            this.BorderSize.Width * 2), proposedSize.Height);
          Size childPreferredSize = this.child.GetPreferredSize(childProposedSize);
-         return new Size(childPreferredSize.Width + this.ArrowWidth + ArrowSeparatorWidth + this.BorderSize.Width * 2,
-                         basePreferredSize.Height);
+         int preferredWidth =
+               childPreferredSize.Width + 
+               this.ArrowWidth + 
+               ArrowSeparatorWidth + 
+               this.BorderSize.Width * 2;
+         return new Size(Math.Max(preferredWidth, basePreferredSize.Width), basePreferredSize.Height);
       }
       public string GetText(string format) {
          if (string.IsNullOrEmpty(format)) {
@@ -442,6 +446,10 @@ namespace Atf.UI {
       private void OnCustomFormatChanged() {
          if (this.format == DateTimeSelectorFormat.Custom) {
             this.child.Format = this.CustomFormat;
+            Control parent = this.Parent;
+            if (parent != null) {
+               parent.PerformLayout(this, "CustomFormat");
+            }
          }
       }
       protected override void OnFontChanged(EventArgs e) {
@@ -462,6 +470,10 @@ namespace Atf.UI {
             case DateTimeSelectorFormat.Time:
                this.child.Format = this.DateTimeFormat.LongTimePattern;
                break;
+         }
+         Control parent = this.Parent;
+         if (parent != null) {
+            parent.PerformLayout(this, "Format");
          }
       }
       protected override void OnEnter(EventArgs e) {
