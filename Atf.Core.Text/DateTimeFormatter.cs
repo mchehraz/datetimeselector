@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2015 Mehrzad Chehraz (mehrzady@gmail.com)
  * Released under the MIT License
  * http://chehraz.ir/mit_license
@@ -221,29 +221,7 @@ namespace Atf.Core.Text {
       }
       #endregion
 
-      #region Methods
-      private void SetDateTimeComponents() {
-         if (this.value.HasValue) {
-            DateTime _value = this.value.Value;
-            Calendar calendar = this.Calendar;
-            this.day = calendar.GetDayOfMonth(_value);
-            this.hour = calendar.GetHour(_value);
-            this.minute = calendar.GetMinute(_value);
-            this.month = calendar.GetMonth(_value);
-            this.second = calendar.GetSecond(_value);
-            this.year = calendar.GetYear(_value);
-            this.am = this.hour < 12;
-         }
-         else {
-            this.day =
-            this.hour =
-            this.month =
-            this.month =
-            this.second =
-            this.year = null;
-            this.am = true;
-         }
-      }
+      #region Methods      
       public void ClearComponentValue(SpecifierInfo specifier) {
          switch (specifier.Type) {
             case SpecifierType.s:
@@ -943,6 +921,28 @@ namespace Atf.Core.Text {
             return specifiers;
          }
          return null;
+      }
+      private void SetDateTimeComponents() {
+         if (this.value.HasValue) {
+            DateTime _value = this.value.Value;
+            Calendar calendar = this.Calendar;
+            this.day = calendar.GetDayOfMonth(_value);
+            this.hour = calendar.GetHour(_value);
+            this.minute = calendar.GetMinute(_value);
+            this.month = calendar.GetMonth(_value);
+            this.second = calendar.GetSecond(_value);
+            this.year = calendar.GetYear(_value);
+            this.am = this.hour < 12;
+         }
+         else {
+            this.day =
+            this.hour =
+            this.minute =
+            this.month =
+            this.second =
+            this.year = null;
+            this.am = true;
+         }
       }
       private static bool ShouldCommit(int? dateTimeValue, int? value) {
          if (dateTimeValue.HasValue) {
