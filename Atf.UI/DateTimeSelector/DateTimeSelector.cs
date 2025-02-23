@@ -370,6 +370,7 @@ namespace Atf.UI {
          this.child.CommitChanges();
          this.DatePopup.Cancel += new EventHandler(DatePopup_Cancel);
          this.DatePopup.DateSelected += new EventHandler(DatePopup_DateSelected);
+         this.DatePopup.DateTimeFormat = this.DateTimeFormat;
          this.DatePopup.Font = this.Font;
          this.DatePopup.CalendarControl.ForeColor = this.calendarForeColor;
          this.DatePopup.RightToLeft = this.calendarRightToLeft;
